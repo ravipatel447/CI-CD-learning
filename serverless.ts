@@ -33,6 +33,10 @@ const serverlessConfiguration: ServerlessFrameworkConfiguration = {
     runtime: "nodejs16.x",
     region: "us-west-2",
     stage: env.STAGE,
+    deploymentBucket: {
+      name: env.DEPLOYMENT_BUCKET,
+      maxPreviousDeploymentArtifacts: 2,
+    },
     environment: {
       ...env,
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
