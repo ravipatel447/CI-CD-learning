@@ -1,6 +1,13 @@
+import {
+  createPerson,
+  deletePerson,
+  getPersonDetail,
+  listAllPersons,
+  updatePerson,
+} from "./person/person";
 export const functions = {
   hello: {
-    handler: "src/functions/hello.handler",
+    handler: "src/handlers/hello.handler",
     events: [
       {
         http: {
@@ -11,4 +18,9 @@ export const functions = {
       },
     ],
   },
+  createPerson,
+  deletePerson,
+  updatePerson,
+  getPersonDetail,
+  listAllPersons,
 };
