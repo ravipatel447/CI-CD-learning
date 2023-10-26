@@ -13,6 +13,9 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       AWS_REGION: ap-south-1
+      SERVICE_NAME: CI_CD_LEARNING
+      STAGE: prod
+      DEPLOYMENT_BUCKET: CI_CD
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
