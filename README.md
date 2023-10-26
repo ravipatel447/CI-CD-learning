@@ -19,7 +19,11 @@ The project code base is mainly located within the `src` folder. This folder is 
 .
 ├── src
 │   ├── functions               # Lambda configuration and source code folder
-│   │   ├── hello.ts
+│   │   ├── index.ts            # index function
+│   │   ├── hello.ts            # function
+├───├── handlers
+│   │   ├── index.ts            # index handlers
+│   │   ├── hello.ts            # handler of function
 │   └── libs                    # Lambda shared code
 │       └── apiGateway.ts       # API Gateway specific helpers
 ├── package.json
