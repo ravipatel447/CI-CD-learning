@@ -15,7 +15,7 @@ jobs:
       AWS_REGION: ap-south-1
       SERVICE_NAME: CI_CD_LEARNING
       STAGE: prod
-      DEPLOYMENT_BUCKET: CI_CD
+      DEPLOYMENT_BUCKET: cicd-deployments-bucket
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
