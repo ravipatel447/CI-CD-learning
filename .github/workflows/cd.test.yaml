@@ -1,0 +1,23 @@
+name: CD:- Check TestCases
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  runTestCases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Install serverless dependency
+        run: yarn install --frozen-lockfile
+      - name: run TestCases
+        run: yarn test

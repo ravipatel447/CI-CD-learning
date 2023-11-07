@@ -18,7 +18,7 @@
     },
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "./serverless.ts", ".eslintrc.js"],
+  "include": ["src/**/*.ts", "./serverless.ts", ".eslintrc.js", "test/**/*.ts"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",
