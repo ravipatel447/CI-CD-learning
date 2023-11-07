@@ -7,8 +7,12 @@ jspm_packages
 
 # esbuild directories
 .esbuild
+.eslintcache
 .DS_Store
 dist
 
 #environment variables
 .env
+
+#yarn error logs
+yarn-error.log

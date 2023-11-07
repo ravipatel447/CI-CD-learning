@@ -15,9 +15,10 @@
     "paths": {
       "@functions/*": ["src/functions/*"],
       "@lib/*": ["src/lib/*"]
-    }
+    },
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "./serverless.ts"],
+  "include": ["src/**/*.ts", "./serverless.ts", ".eslintrc.js"],
   "exclude": [
     "node_modules/**/*",
     ".serverless/**/*",
