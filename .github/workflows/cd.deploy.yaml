@@ -8,6 +8,8 @@ on:
 
 jobs:
   CheckLinting:
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,11 +25,28 @@ jobs:
         run: yarn lint
       - name: Check Linting
         run: yarn type-check
+      - name: Slack Notification Success
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#ci-cd'
+          message: Successfully passed Linting
+        if: success()
+      - name: Slack Notification Failures
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#ci-cd'
+          message: Linting Errors found
+        if: failure()
   Deploy:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       AWS_REGION: ap-south-1
       SERVICE_NAME: ci-cd-learning
       STAGE: prod
@@ -47,3 +66,19 @@ jobs:
         run: npx serverless package
       - name: Deploy Functions
         run: npx serverless deploy --package .serverless
+      - name: Slack Notification Success
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#ci-cd'
+          message: Successfully Deployed {{ env.GITHUB_REF_NAME }} branch
+        if: success()
+      - name: Slack Notification Failures
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#ci-cd'
+          message: Failed to Deploy {{ env.GITHUB_REF_NAME }} branch
+        if: failure()
