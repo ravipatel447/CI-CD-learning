@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
       - name: Install serverless dependency
         run: yarn install --frozen-lockfile
       - name: Check Linting
@@ -30,7 +32,7 @@ jobs:
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-          channel: '#ci-cd'
+          channel: "#ci-cd"
           message: Successfully passed Linting
         if: success()
       - name: Slack Notification Failures
@@ -38,7 +40,7 @@ jobs:
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-          channel: '#ci-cd'
+          channel: "#ci-cd"
           message: Linting Errors found
         if: failure()
       - name: Google Chat Notification
@@ -68,6 +70,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
       - name: Install serverless dependency
         run: yarn install --frozen-lockfile
       - name: Package Functions
@@ -79,7 +83,7 @@ jobs:
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-          channel: '#ci-cd'
+          channel: "#ci-cd"
           message: Successfully Deployed {{ env.GITHUB_REF_NAME }} branch
         if: success()
       - name: Slack Notification Failures
@@ -87,7 +91,7 @@ jobs:
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
-          channel: '#ci-cd'
+          channel: "#ci-cd"
           message: Failed to Deploy {{ env.GITHUB_REF_NAME }} branch
         if: failure()
       - name: Google Chat Notification
