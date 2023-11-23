@@ -41,6 +41,13 @@ jobs:
           channel: '#ci-cd'
           message: Linting Errors found
         if: failure()
+      - name: Google Chat Notification
+        uses: Co-qn/google-chat-notification@releases/v1
+        with:
+          name: Linting
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: ${{ job.status }}
+        if: always()
   Deploy:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -82,3 +89,10 @@ jobs:
           channel: '#ci-cd'
           message: Failed to Deploy {{ env.GITHUB_REF_NAME }} branch
         if: failure()
+      - name: Google Chat Notification
+        uses: Co-qn/google-chat-notification@releases/v1
+        with:
+          name: Deploy
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: ${{ job.status }}
+        if: always()
