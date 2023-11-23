@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
+          cache: "yarn"
+          cache-dependency-path: "**/yarn.lock"
       - name: Install serverless dependency
         run: yarn install --frozen-lockfile
       - name: Check Linting
